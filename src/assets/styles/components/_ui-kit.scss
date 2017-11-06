@@ -1,0 +1,55 @@
+.banner {
+	background-color: $black;
+	height: 12rem;
+}
+
+.color-swatch {
+	height: 72px;
+	width: 72px;
+	border-radius: 36px;
+	@media screen and (max-width: 1280px) {
+		margin: 0 auto;
+	}
+	&.blue {
+		background-color: $blue;
+	}
+	&.light-blue {
+		background-color: $light-blue;
+	}
+	&.white {
+		background-color: $white;
+	}
+	&.off-white {
+		background-color: $white;
+	}
+	&.light-grey {
+		background-color: $light-grey;
+	}
+	&.grey {
+		background-color: $grey;
+	}
+	&.dark-grey {
+		background-color: $dark-grey;
+	}
+	&.carbon {
+		background-color: $carbon;
+	}
+	&.black {
+		background-color: $black;
+	}
+	&.green {
+		background-color: $green;
+	}
+	&.gold {
+		background-color: $gold;
+	}
+	&.red {
+		background-color: $red;
+	}
+}
+
+.banner--text__wrapper {
+	h3 {
+		line-height: 6rem;
+	}
+}

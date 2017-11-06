@@ -1,0 +1,128 @@
+html {
+	// Setting default font size here for rem.
+	font-size: 12px;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.text-align__center {
+	text-align: center;
+} 
+
+h1,
+h2,
+h3,
+h4,
+p {
+	color: $black;
+	display: block;
+	font-family: 'Open Sans';
+	position: relative;
+	&.inverse {
+		color: $off-white;
+	}
+}
+
+.mega {
+	font-size: 18rem;
+	font-weight: 700;
+	letter-spacing: 2px;
+	margin: 72px 0;
+}
+
+h1 {
+	font-size: 5rem;
+	font-weight: 300;
+	letter-spacing: 0;
+	line-height: 4rem;
+}
+
+h2 {
+	font-size: 3rem;
+	font-weight: 600;
+	letter-spacing: 0;
+	line-height: 4rem;
+}
+
+h3 {
+	font-size: 2rem;
+	font-weight: 400;
+	letter-spacing: 0;
+	line-height: 3rem;
+}
+
+h4 {
+	font-size: 1.166667rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	line-height: 2rem;
+	text-transform: uppercase;
+}
+
+p {
+	font-weight: 400;
+	letter-spacing: 0;
+
+	&.paragraph {
+		font-size: 1.333333rem;
+		line-height: 2rem;	
+	}	
+
+	&.utility {
+		color: $dark-grey;
+		font-size: 1.0875rem;
+		letter-spacing: 0;
+		line-height: 1.5rem;
+		&.bold {
+			@extend .bold;
+		}
+		&.info {
+			margin-top: -6px;
+		}
+	}
+}
+
+.partial-underscore {
+
+	&:after {
+		content: "";
+		height: 1px;
+		width: 28px;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		background-color: $dark-grey;
+	}
+	&.text-align--center-mobile::after {
+		@media screen and (max-width: 1280px) {
+			display: none;
+		}
+	}
+}
+
+// Text Colors
+.color__primary {
+	color: $blue;
+}
+
+.color__secondary {
+	color: $light-blue;
+}
+
+.color__tertiary {
+	color: $white;
+}
+// Supportive text colors (success, notice, error)
+.color__success {
+	color: $green;
+}
+
+.color__notice {
+	color: $gold;
+}
+
+.color__error {
+	color: $red;
+}

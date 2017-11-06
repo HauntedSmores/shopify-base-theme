@@ -1,0 +1,177 @@
+<header class="cd-main-header">
+	<a class="cd-logo" href="#0">
+		<img src="{{ 'v_p_v-logo.png' | asset_url }}" alt="V+V">
+	</a>
+	<ul class="cd-header-buttons">
+		<li>
+			<a class="cd-search-trigger" href="#cd-search">
+				<span></span>
+			</a>
+		</li>
+		<li>
+			<a class="cd-nav-trigger" href="#cd-primary-nav">
+				<span></span>
+			</a>
+		</li>
+	</ul> <!-- cd-header-buttons -->
+</header>
+
+<div class="row flush cd-main-content" role="main" id="MainContent">
+	{{ content_for_layout }}
+</div>
+<div class="cd-overlay"></div>
+
+<nav class="cd-nav">
+	<ul id="cd-primary-nav" class="cd-primary-nav is-fixed">
+		{% for link in linklists.main-menu.links %}
+			<li class="{% if linklists[link.handle].links.size > 0 %}has-children{% endif %}">
+				<a href="{{link.url}}">
+					{{ link.title }}
+				</a>
+				<!-- Replace 'shop' with handle of linklist(s) -->
+				{% if link.handle == 'shop' and linklists[link.handle].links.size > 0 %}
+					<ul class="cd-secondary-nav is-hidden">
+						<li class="go-back">
+							<a href="#">
+								{{ link.title }}
+							</a>
+						</li>
+						<li class="see-all">
+							<a href="/">
+								All {{ link.title }}
+							</a>
+						</li>
+						{% for sublink in linklists[link.handle].links %}	
+							{% if linklists[sublink.handle].links.size > 0 %}
+								<li class="has-children">
+									<a href="#">
+										{{ sublink.title}}
+									</a>
+									<ul class="is-hidden sub--nav">
+										<li class="go-back">
+											<a href="#0">
+												{{ link.title }}
+											</a>
+										</li>
+
+										<li class="see-all">
+											<a href="{{ sublink.url}}">
+												All {{ sublink.title }}
+											</a>
+										</li>
+										{% for subsublink in linklists[sublink.handle].links %}
+											{% if linklists[subsublink.handle].links.size > 0%}	
+												<li class="has-children">
+													<a href="#">
+														{{ subsublink.title}}
+													</a>
+													<ul class="is-hidden sub--nav">
+														<li class="go-back">
+															<a href="#0">
+																{{ sublink.title }}
+															</a>
+														</li>
+														<li class="see-all">
+															<a href="{{ subsublink.url}}">
+																All {{ subsublink.title }}
+															</a>
+														</li>
+														{% for subsubsublink in linklists[subsublink.handle].links %}
+															<li>
+																<a href="{{ subsubsublink.url }}">
+																	{{ subsubsublink.title }}
+																</a>
+															</li>
+														{% endfor %}
+													</ul>
+												</li>
+											{% else %}
+												<li>
+													<a href="{{ subsublink.url }}">
+														{{ subsublink.title }}
+													</a>
+												</li>
+											{% endif %}	
+										{% endfor %}
+									</ul>
+								</li>
+							{% else %}	
+								<li>
+									<a href="{{ sublink.url }}">
+										{{ sublink.title }}
+									</a>	
+								</li>
+							{% endif %}	
+						{% endfor %}
+					</ul>	
+				<!-- Replace 'blog' with handle of linklist(s) you'd like to display in gallery view -->
+				{% elsif link.handle == 'blog' and linklists[link.handle].links.size > 0 %}	
+					<ul class="cd-nav-gallery is-hidden">
+						<li class="go-back">
+							<a href="#">
+								{{ link.title }}
+							</a>
+						</li>
+						<li class="see-all">
+							<a href="{{link.url}}">
+								Browse {{link.title}}s
+							</a>
+						</li>
+						<div class="row flush">
+							<div class="row">
+							{% for sublink in linklists[link.handle].links %}	
+									<div class="col-3-lg col-3-md col-16-sm col-3-sm col-12-xs">
+										<a class="cd-nav-item" href="{{sublink.url}}">
+											{% assign img_name = sublink.handle | append: '.png' %}
+											<img src="{{ img_name | asset_url }}" alt="Blog Image">
+											<h3>
+												{{ sublink.title }}
+											</h3>
+										</a>
+									</div>
+								{% endfor%}
+							</div>
+						</div>		
+					</ul>
+				<!-- Replace 'shop' with handle of linklist(s) you'd like to display with icons. sublink handle should match the second part of the filename of the icon, e.g.  handle == 'help' for icon with the file name icon-help.svg. additionally, the icon must be in the src/icons directory -->
+				{% elsif link.handle == 'features' and linklists[link.handle].links.size > 0 %}
+					<ul class="cd-nav-icons is-hidden">
+						<li class="go-back">
+							<a href="#">
+								{{link.title}}
+							</a>
+						</li>
+						<li class="see-all">
+							<a href="/">
+								Browse {{link.title}}s
+							</a>
+						</li>
+						<div class="row">
+							{% for sublink in linklists[link.handle].links %}							
+								<div class="col-4-lg col-4-md col-12-sm col-12-xs">
+									<a class="feature--icon" href="{{sublink.url}}">
+										<div class="row flush align-center">
+											{% assign icon_snippet = "icon-" | append: sublink.handle %}
+											<div class="col-auto centered icon--wrapper">
+												{% include icon_snippet %}
+											</div>
+											<h3 class="feature--icon__inner {{ sublink.handle }}">
+												{{sublink.title }}
+											</h3>
+										</div>	
+									</a>
+								</div>	
+							{% endfor %}	
+						</div>	
+					</ul>
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>	
+</nav> <!-- cd-nav -->
+
+<div id="cd-search" class="cd-search">
+	<form>
+		<input type="search" placeholder="Search...">
+	</form>
+</div>

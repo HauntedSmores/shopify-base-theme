@@ -1,0 +1,63 @@
+{%- assign max_height = 250 -%}
+
+<div class="collection-wrapper">
+  <header class="collection-header">
+    <div class="page-width">
+      <div>
+        <h1>{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div>{{ collection.description }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="grid-wrapper row">
+    {% assign tag_string = '' %}
+
+    {% comment %} ************* {% endcomment %}
+    {% comment %} GROUPING LOOP {% endcomment %}
+    {% comment %} ************* {% endcomment %}
+    {% assign already_displayed = '' %}
+
+    {% paginate collection.products by 1000 %}
+      {% for product in collection.products %}
+          {% assign product_tags = product.tags | join: '**' %}
+
+          {% if product_tags contains 'style' and product_tags contains 'material' %}
+              {% for tag in product.tags %}
+                {% if tag contains 'style' %}
+                  {% assign style_tag = tag | split: ':' | last %}
+                {% endif %}
+                {% if tag contains 'material' %}
+                  {% assign material_tag = tag | split: ':' | last %}
+                {% endif %}
+              {% endfor %}
+              {% assign displayed_tag = style_tag | append: '-' | append: material_tag %}
+              {% include 'plp-display-logic' %}
+          {% elsif product_tags contains 'style' %}
+              {% for tag in product.tags %}
+                {% if tag contains 'style' %}
+                  {% assign style_tag = tag | split: ':' | last %}
+                {% endif %}
+              {% endfor %}
+              {% assign displayed_tag = style_tag %}
+              {% include 'plp-display-logic' %}
+          {% else %}
+              {% include 'plp-markup' %}
+          {% endif %}
+
+      {% endfor %}
+    {% endpaginate %}
+    {% comment %} ***************** {% endcomment %}
+    {% comment %} END GROUPING LOOP {% endcomment %}
+    {% comment %} ***************** {% endcomment %}
+
+    {% if is_empty_collection %}
+      <div class="no-matching-products">
+        <p>No products in this collection</p>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
