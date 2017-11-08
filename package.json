@@ -5,16 +5,16 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack --watch",
-    "deploy": "shopify-themekit replace --env production"
+    "dev": "concurrently \"shopify-themekit watch -d dist\" \"webpack --watch\" --kill-others",
+    "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production"
   },
   "author": "V+V",
   "license": "ISC",
   "devDependencies": {
     "@shopify/themekit": "^0.6.12",
+    "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
-    "extract-loader": "^1.0.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "node-sass": "^4.6.0",
     "sass-loader": "^6.0.6",

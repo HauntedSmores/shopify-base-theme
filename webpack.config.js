@@ -8,30 +8,16 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const copyWebpack = new CopyWebpackPlugin([
-  {
-    from: 'src/templates', 
-    to: '../../dist/templates' 
-  },
-  {
-    from: 'src/snippets', 
-    to: '../../dist/snippets' 
-  },
-  {
-    from: 'src/sections', 
-    to: '../../dist/sections' 
-  },
-  {
-    from: 'src/layouts', 
-    to: '../../dist/layouts' 
-  },
-  {
-    from: 'src/locales', 
-    to: '../../dist/locales' 
-  },
-  {
-    from: 'src/config.yml', 
-    to: '../../dist/config.yml' 
-  }
+	 {
+	    from: 'src',
+	    to: '../',
+		ignore: 'assets/**'
+	},
+	{
+		from: 'src/assets/images',
+		to: './',
+		flatten: true
+	}
 ]);
 
 module.exports = {
@@ -43,16 +29,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.scss$/,
-      // include: '/src/assets/styles/',
-      use: extractSass.extract({
-          use: [{
-            loader: "css-loader"
-          }, {
-            loader: "sass-loader"
-          }],
-          // use style-loader in development
-          fallback: "style-loader"
-      })
+      use: extractSass.extract(["css-loader","sass-loader"])
     }]
   },
   plugins: [

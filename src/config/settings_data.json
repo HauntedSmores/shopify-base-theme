@@ -1,0 +1,90 @@
+{
+  "current": {
+    "type_base_size": "14px",
+    "color_primary": "#3d70b2",
+    "color_body_text": "#000",
+    "social_sharing_blog": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "social_pinterest_link": "",
+    "social_instagram_link": "",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "cart_notes_enable": true,
+    "favicon": "shopify:\/\/shop_images\/black-brown-goat.jpg",
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#1990c6",
+    "checkout_button_color": "#1990c6",
+    "checkout_error_color": "#ff6d6d",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/mobile-receipt-shopify.png",
+          "logo_max_width": 100,
+          "main_linklist": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_linklist": "footer",
+          "show_payment_icons": false
+        }
+      },
+      "product": {
+        "type": "product",
+        "settings": {
+          "show_share_buttons": true
+        }
+      },
+      "slider": {
+        "type": "slider",
+        "settings": {
+          "title": "Product slideshow",
+          "image": ""
+        }
+      },
+      "1507066524815": {
+        "type": "slider",
+        "settings": {
+          "title": "Slide #1",
+          "image": "shopify:\/\/shop_images\/w_r-1120.jpg"
+        }
+      },
+      "1507127859043": {
+        "type": "slider",
+        "settings": {
+          "title": "Slide #2",
+          "image": "shopify:\/\/shop_images\/basilica-roof.jpg"
+        }
+      }
+    },
+    "content_for_index": [
+      "1507066524815",
+      "1507127859043"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "content_for_index": [
+
+      ]
+    }
+  }
+}

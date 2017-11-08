@@ -1,0 +1,20 @@
+development:
+  password: 97272b3a3c63ef9c8a45b7d79c9bd514
+  theme_id: 698351641
+  store: verbalplusvisual.myshopify.com
+  ignore_files:
+    # - settings_data.json
+    - src
+    - node_modules
+    - package.json
+    - package-lock.json
+production:
+  password: 97272b3a3c63ef9c8a45b7d79c9bd514
+  theme_id: "live"
+  store: verbalplusvisual.myshopify.com
+  ignore_files:
+    # - settings_data.json
+    - src
+    - node_modules
+    - package.json
+    - package-lock.json
