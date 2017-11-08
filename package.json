@@ -4,8 +4,8 @@
   "description": "Verbal + Visual - Shopify base theme",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "concurrently \"shopify-themekit watch -d dist\" \"webpack --watch\" --kill-others",
+    "build": "rm -rf dist/* && webpack",
+    "dev": "concurrently \"webpack --watch\" \"shopify-themekit watch -d dist\" --kill-others",
     "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production"
   },
   "author": "V+V",
