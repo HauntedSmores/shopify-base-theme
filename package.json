@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "rm -rf dist/* && webpack",
-    "dev": "concurrently \"webpack --watch\" \"shopify-themekit watch -d dist\" --kill-others",
+    "dev": "concurrently -n \"webpack,theme\" -c \"cyanfe,green\" \"webpack --watch\" \"shopify-themekit watch -d dist\" --kill-others",
     "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production"
   },
   "author": "V+V",

@@ -1,65 +1,48 @@
-/*================ Slate specific reset ================*/
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
-
-body,
-input,
-textarea,
-button,
-select {
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  outline: none;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
 }
-
-a:focus {
-  color: inherit;
+body {
+	line-height: 1;
 }
-
-img {
-  max-width: 100%;
+ol, ul {
+	list-style: none;
 }
-
-/*================ Form element helpers ================*/
-form {
-  margin: 0;
+blockquote, q {
+	quotes: none;
 }
-
-
-button,
-input[type="submit"],
-label[for] {
-  cursor: pointer;
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
 }
-
-optgroup {
-  font-weight: $font-weight-bold;
-}
-
-// Force option color (affects IE only)
-option {
-  color: $color-body-text;
-  background-color: $color-body;
-}
-
-// hide outline on focus for elements which are given focus by JS
-[tabindex='-1']:focus {
-  outline: none;
-}
-
-/*============================================================================
-  Fast Tap
-  enables no-delay taps (FastClick-esque) on supporting browsers
-==============================================================================*/
-a,
-button,
-[role="button"],
-input,
-label,
-select,
-textarea {
-  touch-action: manipulation;
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }

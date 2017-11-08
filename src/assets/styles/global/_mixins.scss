@@ -1,13 +1,5 @@
 /*================ Mixins ================*/
 
-// Clearfix
-@mixin clearfix {
-  &::after {
-    clear: both;
-    content: "";
-    display: table;
-  }
-}
 // Prefix
 @mixin prefix($property, $value, $prefixes) {
   @each $prefix in $prefixes {

@@ -1,0 +1,20 @@
+/*==== Grid ===*/
+
+// Gutter size
+$gutter: 12px;
+
+// Grid size
+$number-of-columns: 12;
+
+// Breakpoints
+$xs-break: 375px;
+$sm-break: 768px;
+$md-break: 992px;
+$lg-break: 1440px;
+
+/*==== Colors ===*/
+$primary-color: #{'{{ settings.primary_color }}'};
+$accent-color: #{'{{ settings.accent_color }}'};
+
+/*==== Typography ====*/
+$base-font-size: #{'{{ settings.base_font_size }}'};

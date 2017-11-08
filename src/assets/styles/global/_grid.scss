@@ -1,9 +1,21 @@
-// mixins for width and margin calculation
+.container_lg {
+    margin: 0 auto;
+    max-width: $lg-break;
+}
+.container_md {
+    margin: 0 auto;
+    max-width: $md-break;
+}
+.container_sm {
+    margin: 0 auto;
+    max-width: $sm-break;
+}
 
+// Mixins for width and margin calculation
 @mixin width($width) {
   width: ($width / $number-of-columns) * 100%;
 }
-@mixin margin-left($width) {
+@mixin offset-width($width) {
   margin-left: ($width / $number-of-columns) * 100%;
 }
 
@@ -34,16 +46,28 @@
     }
   }
 
-  &.justify-around {
-    justify-content: space-around;
+  &.justify_around {
+      justify-content: space-around;
   }
 
-  &.justify-between {
-    justify-content: space-between;
+  &.justify_between {
+      justify-content: space-between;
+  }
+
+  &.justify_center {
+      justify-content: center;
+  }
+
+  &.justify_end {
+      justify-content: flex-end;
+  }
+
+  &.no_wrap {
+      flex-wrap: nowrap;
   }
 }
 
-// base class
+// Base class
 [class^="col-"] {
   padding: $gutter;
   box-sizing: border-box;
@@ -68,43 +92,39 @@
 
 .col-auto {
   width: auto;
-  &.centered {
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
-// generate classes based on grid variable
+// Generate classes based on grid variable
 @for $i from 1 through $number-of-columns {
 
-  @media screen and (max-width: $xs-max) {
+  @media screen and (max-width: $xs-break) {
     // base column sizes
-    .col-#{$i}-xs {
+    .col-#{$i} {
       @include width($i);
     }
     // base offsets
-    .offset-#{$i}-xs {
-      @include margin-left($i);
+    .offset-#{$i} {
+      @include offset-width($i);
     }
   }
 
   // sm
-  @media screen and (min-width: $sm-break) and (max-width: $sm-max) {
+  @media screen and (min-width: $sm-break) {
     .col-#{$i}-sm {
       @include width($i);
     }
     .offset-#{$i}-sm {
-      @include margin-left($i);
+      @include offset-width($i);
     }
   }
 
   // md
-  @media screen and (min-width: $md-break) and (max-width: $md-max) {
+  @media screen and (min-width: $md-break) {
     .col-#{$i}-md {
       @include width($i);
     }
     .offset-#{$i}-md {
-      @include margin-left($i);
+      @include offset-width($i);
     }
   }
 
@@ -114,7 +134,7 @@
       @include width($i);
     }
     .offset-#{$i}-lg {
-      @include margin-left($i);
+      @include offset-width($i);
     }
   }
 }

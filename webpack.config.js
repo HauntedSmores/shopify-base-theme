@@ -18,7 +18,8 @@ const copyWebpack = new CopyWebpackPlugin([
 		to: './',
 		flatten: true
 	}
-]);
+]
+);
 
 module.exports = {
   entry: './src/assets/scripts/theme.js',
@@ -28,8 +29,7 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.scss$/,
-      use: extractSass.extract(["css-loader","sass-loader"])
+      test: /\.scss$/
     }]
   },
   plugins: [

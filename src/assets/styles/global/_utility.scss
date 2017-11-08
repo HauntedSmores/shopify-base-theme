@@ -1,0 +1,31 @@
+/*================ Dividers ================*/
+hr.divider {
+  height: 1px;
+  background-color: grey;
+  width: 100%;
+  border: none;
+}
+
+
+/*================ Margin and Padding Classes ================*/
+
+.margin__top--small {
+  margin-top: 24px;
+}
+
+.margin__top--medium {
+  margin-top: 48px;
+}
+
+.margin__top--large {
+  margin-top: 72px;
+}
+
+/*================ Helper Classes ================*/
+.clearfix {
+    &::after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+}

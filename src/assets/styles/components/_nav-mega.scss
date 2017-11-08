@@ -4,7 +4,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$nav-color-1: $off-white; 
+$nav-color-1: $off-white;
 $nav-color-2: $off-white;
 $nav-color-3: $off-white;
 $nav-color-4: $blue;
@@ -33,12 +33,11 @@ $above-content: 3;
 
 
 // breakpoints
-   
+
 $S:     $sm-max;
 $M:     $md-max;
 $L:     $lg-break;
-$maxL:    $L - 1px;    
-
+$maxL:    $L - 1px;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,16 +48,16 @@ $maxL:    $L - 1px;
 
 @mixin MQ($canvas) {
   @if $canvas == S {
-   @media only screen and (min-width: $S) { @content; } 
+   @media only screen and (min-width: $S) { @content; }
   }
   @else if $canvas == M {
-   @media only screen and (min-width: $M) { @content; } 
+   @media only screen and (min-width: $M) { @content; }
   }
   @else if $canvas == L {
-   @media only screen and (min-width: $L) { @content; } 
+   @media only screen and (min-width: $L) { @content; }
   }
   @else if $canvas == maxL {
-   @media only screen and (max-width: $maxL) { @content; } 
+   @media only screen and (max-width: $maxL) { @content; }
   }
 }
 
@@ -76,7 +75,7 @@ $maxL:    $L - 1px;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -89,10 +88,10 @@ Primary style
 body {
 	font: {
 		size: 1.6rem;
-		family: $primary-nav-font; 
+		family: $primary-nav-font;
 	}
 	color: $nav-color-1;
-	@include MQ(maxL) { 
+	@include MQ(maxL) {
 		&.nav-on-left.overflow-hidden {
 			overflow: hidden;
 		}
@@ -130,9 +129,9 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Main components 
+Main components
 
 -------------------------------- */
 .cd-main-content, .cd-main-header {
@@ -493,7 +492,7 @@ Main components
 		height: inherit;
 		color: $nav-color-1;
 	}
-	
+
 	.feature--icon__inner {
 		width: 100%;
 		text-align: center;
@@ -910,7 +909,7 @@ Main components
 		&.selected::after {
 			@include transform(rotate(45deg));
 		}
-	} 
+	}
 
 	.cd-secondary-nav > .has-children > a::before, .cd-secondary-nav > .has-children > a::after {
 		/* remove arrows on secondary nav titles */
@@ -985,7 +984,7 @@ Main components
 			font-weight: 300;
 
 			@include placeholder {
-				
+
 			}
 		}
 	}
@@ -1005,7 +1004,7 @@ Main components
 	opacity: 0;
 	@include backface-visibility(hidden);
 	@include transition(opacity .3s 0s, visibility 0s .3s, transform .3s 0s);
-	
+
 	&.is-visible {
 		opacity: 1;
 		visibility: visible;
@@ -1025,9 +1024,9 @@ Main components
 	}
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-support for no js 
+support for no js
 
 -------------------------------- */
 

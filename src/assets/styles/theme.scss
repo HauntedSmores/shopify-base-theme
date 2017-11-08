@@ -1,31 +1,26 @@
 @charset "UTF-8";
-/*============================================================================
-  [replace with theme name] | Built with Slate
-    - You cannot use native CSS/Sass @imports in this file without a build script
-==============================================================================*/
 
-/*================ Tools ================*/
+// Variables
+@import 'global/variables';
+
+// Mixins
 @import 'global/mixins';
 
-/*================ SETTINGS ================*/
-@import 'variables/variables.scss.liquid';
-
-/*================ COMMON ================*/
+// Common
 @import 'global/normalize';
 @import 'global/reset';
-@import 'global/helper-classes';
+@import 'global/utility';
+@import 'global/typography';
 @import 'global/layout';
-@import 'global/icons';
-@import 'global/links-buttons';
 @import 'global/forms';
 @import 'global/grid';
-@import 'global/fonts';
-@import 'global/typography';
 
-/*================ MODULES ================*/
-@import 'components/site-header';
-@import 'components/gift-card-template';
-@import 'components/nav-mega';
-@import 'components/footer';
-@import 'components/homepage';
+// Components
+@import 'components/gift-card';
+// @import 'components/nav-mega';
 @import 'components/ui-kit';
+
+// Pages
+@import 'pages/index';
+@import 'pages/blog';
+@import 'pages/cart';
