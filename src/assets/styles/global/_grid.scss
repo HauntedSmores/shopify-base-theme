@@ -1,17 +1,16 @@
-.container_lg {
+.container-lg {
     margin: 0 auto;
     max-width: $lg-break;
 }
-.container_md {
+.container-md {
     margin: 0 auto;
     max-width: $md-break;
 }
-.container_sm {
+.container-sm {
     margin: 0 auto;
     max-width: $sm-break;
 }
 
-// Mixins for width and margin calculation
 @mixin width($width) {
   width: ($width / $number-of-columns) * 100%;
 }
@@ -46,23 +45,23 @@
     }
   }
 
-  &.justify_around {
+  &.justify-around {
       justify-content: space-around;
   }
 
-  &.justify_between {
+  &.justify-between {
       justify-content: space-between;
   }
 
-  &.justify_center {
+  &.justify-center {
       justify-content: center;
   }
 
-  &.justify_end {
+  &.justify-end {
       justify-content: flex-end;
   }
 
-  &.no_wrap {
+  &.no-wrap {
       flex-wrap: nowrap;
   }
 }

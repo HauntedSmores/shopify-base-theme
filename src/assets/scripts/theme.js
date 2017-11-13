@@ -1,3 +1,5 @@
 import '../styles/theme.scss';
 
-console.log('loaded');
+setTimeout(() => {
+    console.log("Loaded resources");
+}, 1000);

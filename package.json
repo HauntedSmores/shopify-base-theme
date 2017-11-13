@@ -5,21 +5,30 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "rm -rf dist/* && webpack",
-    "dev": "concurrently -n \"webpack,theme\" -c \"cyanfe,green\" \"webpack --watch\" \"shopify-themekit watch -d dist\" --kill-others",
+    "dev": "concurrently -n \"webpack,theme\" -c \"cyan,green\" \"webpack --watch\" \"shopify-themekit watch -d dist -n theme.update -e production\" \"browser-sync start -c bs-config.js\" --kill-others",
     "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production"
   },
   "author": "V+V",
   "license": "ISC",
   "devDependencies": {
     "@shopify/themekit": "^0.6.12",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.18.13",
     "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "extract-loader": "^1.0.1",
+    "file-loader": "^1.1.5",
     "node-sass": "^4.6.0",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
     "webpack": "^3.8.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

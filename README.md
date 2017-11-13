@@ -23,7 +23,7 @@ Clears the `dist` folder and watches your `src` directory for changes and upload
 
 **Note**: Deleting any file in your `src` directory **will not** delete that file from `dist`.
 
-This is a limitation of the `copy-webpack-plugin` used to copy theme files over from `src` to `dist`. It will not delete files during `webpack --watch`. You can either stop your dev command and run the build command or make your deletions in both `src` and `dist`.
+This is a limitation of the `copy-webpack-plugin` used to copy theme files over from `src` to `dist`. It will not delete files during `webpack --watch`. You can either stop your dev command and run the build or watch command again, or make your deletions in both `src` and `dist`.
 
 ### deploy
 

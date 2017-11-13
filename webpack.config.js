@@ -1,39 +1,48 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const extractSass = new ExtractTextPlugin({
-  filename: "theme.scss.liquid",
-  disable: process.env.NODE_ENV === "development"
-});
-
-const copyWebpack = new CopyWebpackPlugin([
-	 {
-	    from: 'src',
-	    to: '../',
-		ignore: 'assets/**'
-	},
-	{
-		from: 'src/assets/images',
-		to: './',
-		flatten: true
-	}
-]
-);
+const copyWebpack = new CopyWebpackPlugin([{
+    from: 'src',
+    to: '../',
+    ignore: 'assets/**'
+  },
+  {
+    from: 'src/assets/images',
+    to: './',
+    flatten: true
+  }
+]);
 
 module.exports = {
-  entry: './src/assets/scripts/theme.js',
-  output: {
-    filename: 'theme.js',
-    path: path.resolve(__dirname, 'dist/assets')
-  },
-  module: {
-    rules: [{
-      test: /\.scss$/
-    }]
-  },
-  plugins: [
-    extractSass,
-    copyWebpack
-  ]
+    entry: './src/assets/scripts/theme.js',
+    output: {
+        filename: 'theme.js',
+        path: path.resolve(__dirname, 'dist/assets')
+    },
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].css'
+                        }
+                    },
+                    "extract-loader",
+                    "css-loader",
+                    "sass-loader"
+                ]
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader"
+            }
+        ]
+    },
+    plugins: [
+        copyWebpack
+    ]
 };

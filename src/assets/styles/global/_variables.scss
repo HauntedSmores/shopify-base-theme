@@ -13,8 +13,13 @@ $md-break: 992px;
 $lg-break: 1440px;
 
 /*==== Colors ===*/
-$primary-color: #{'{{ settings.primary_color }}'};
-$accent-color: #{'{{ settings.accent_color }}'};
+// $primary-color: #{'{{ settings.primary_color }}'};
+// $accent-color: #{'{{ settings.accent_color }}'};
+
+$primary-color: orange;
+$accent-color: red;
 
 /*==== Typography ====*/
-$base-font-size: #{'{{ settings.base_font_size }}'};
+$base-font-size: 16px;
+
+// $base-font-size: #{'{{ settings.base_font_size }}'};
