@@ -5,8 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "rm -rf dist/* && webpack",
-    "dev": "concurrently -n \"webpack,theme\" -c \"cyan,green\" \"webpack --watch\" \"shopify-themekit watch -d dist -n theme.update -e production\" \"browser-sync start -c bs-config.js\" --kill-others",
-    "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production"
+    "dev": "rm -rf dist/* && concurrently -n \"webpack,theme\" -c \"cyan,green\" \"webpack --watch\" \"shopify-themekit watch -d dist -n theme.update -e production\" \"browser-sync start -c bs-config.js\" --kill-others",
+    "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production",
+    "watch": "rm -rf dist/* && concurrently -n \"webpack\" -c \"cyan\" \"webpack --watch\" \"browser-sync start -c bs-config.js\" --kill-others",
+    "theme-watch": "shopify-themekit watch -d dist -n theme.update -e production"
   },
   "author": "V+V",
   "license": "ISC",
@@ -18,10 +20,10 @@
     "browser-sync": "^2.18.13",
     "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.2.0",
-    "css-loader": "^0.28.7",
     "extract-loader": "^1.0.1",
     "file-loader": "^1.1.5",
     "node-sass": "^4.6.0",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
     "webpack": "^3.8.1"
   },

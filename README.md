@@ -1,5 +1,7 @@
 # V+V Base Shopify theme
 
+## Setup
+
 To get started using the theme, clone this repository:
 
 `git clone git@github.com:verbalplusvisual/vpv-shopify-base-theme.git`
@@ -10,7 +12,11 @@ or if you dont have SSH setup with github:
 
 Next, run `npm install` to install required dependencies.
 
-Finally, edit the `config.yml` to use your correct password and theme id's. Your production definition block **must** be called "production" for the `deploy` command to work properly.
+Edit the `config.yml` to use your correct password and theme id's. Your production definition block **must** be called "production" for the `deploy` command to work properly.
+
+Detailed instructions on setting up `config.yml` can be found [here.](https://shopify.github.io/themekit/configuration)
+
+Finally, update the `proxy` value in the `bs-config.js` file to correctly proxy your live Shopify domain to your local BrowserSync server during development.
 
 ## Comands
 Listed here are the commands available with this theme. Command syntax: `npm run <command>`.
@@ -21,9 +27,11 @@ Builds the `src` directory to `dist`. This includes deleting what is currently i
 ### dev
 Clears the `dist` folder and watches your `src` directory for changes and uploads them to your shopify store.
 
-**Note**: Deleting any file in your `src` directory **will not** delete that file from `dist`.
+**Note**: Deleting a file in your `src` directory **will not** delete that file from `dist`, and therefore not delete if from Shopify.
 
-This is a limitation of the `copy-webpack-plugin` used to copy theme files over from `src` to `dist`. It will not delete files during `webpack --watch`. You can either stop your dev command and run the build or watch command again, or make your deletions in both `src` and `dist`.
+This is a limitation of the `copy-webpack-plugin` used to copy certain theme files over from `src` to `dist`. It will not delete files during `webpack --watch`.
+
+You can either stop your dev command, run `npm run build`, and rerun `npm run dev` or make your deletions in both `src` and `dist`.
 
 ### deploy
 

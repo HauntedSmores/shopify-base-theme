@@ -19,6 +19,7 @@ module.exports = {
         filename: 'theme.js',
         path: path.resolve(__dirname, 'dist/assets')
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -27,11 +28,11 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].css'
+                            name: '[name].scss.liquid'
                         }
                     },
                     "extract-loader",
-                    "css-loader",
+                    "raw-loader",
                     "sass-loader"
                 ]
             },
