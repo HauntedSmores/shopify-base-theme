@@ -1,40 +1,31 @@
 const path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractScss = require('extract-text-webpack-plugin');
 
-const copyWebpack = new CopyWebpackPlugin([{
-    from: 'src',
-    to: '../',
-    ignore: 'assets/**'
-  },
+const copyWebpack = new CopyWebpackPlugin([
   {
-    from: 'src/assets/images',
+    from: 'src/assets',
     to: './',
     flatten: true
-  }
+}
 ]);
 
+const extractScss = new ExtractScss("theme.scss.liquid");
+
 module.exports = {
-    entry: './src/assets/scripts/theme.js',
+    entry: './src/scripts/theme.js',
     output: {
         filename: 'theme.js',
-        path: path.resolve(__dirname, 'dist/assets')
+        path: path.resolve(__dirname, 'assets')
     },
     devtool: 'inline-source-map',
     module: {
         rules: [
             {
                 test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].scss.liquid'
-                        }
-                    },
-                    "extract-loader",
-                    "raw-loader",
-                    "sass-loader"
-                ]
+                use: ExtractScss.extract({
+                    use: ["raw-loader", "sass-loader"]
+                })
             },
             {
                 test: /\.js$/,
@@ -44,6 +35,7 @@ module.exports = {
         ]
     },
     plugins: [
-        copyWebpack
+        copyWebpack,
+        extractScss
     ]
 };

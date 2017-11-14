@@ -5,10 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "rm -rf dist/* && webpack",
-    "dev": "rm -rf dist/* && concurrently -n \"webpack,theme\" -c \"cyan,green\" \"webpack --watch\" \"shopify-themekit watch -d dist -n theme.update -e production\" \"browser-sync start -c bs-config.js\" --kill-others",
-    "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -d dist -e production",
-    "watch": "rm -rf dist/* && concurrently -n \"webpack\" -c \"cyan\" \"webpack --watch\" \"browser-sync start -c bs-config.js\" --kill-others",
-    "theme-watch": "shopify-themekit watch -d dist -n theme.update -e production"
+    "dev": "rm -rf dist/* && concurrently -n \"WEBPACK,THEME,SYNC\" -c \"cyan.bold,green.bold,magenta.bold\" \"webpack --watch\" \"shopify-themekit watch -n theme.update -e production\" \"browser-sync start -c bs-config.js\" --kill-others",
+    "deploy": "rm -rf dist/* && webpack && shopify-themekit replace -e production",
+    "webpack-watch": "rm -rf dist/* && concurrently -n \"webpack\" -c \"cyan\" \"webpack --watch\" \"browser-sync start -c bs-config.js\" --kill-others",
+    "theme-watch": "shopify-themekit watch -n theme.update -e production"
   },
   "author": "V+V",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.2.0",
     "extract-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
     "node-sass": "^4.6.0",
     "raw-loader": "^0.5.1",
