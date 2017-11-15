@@ -64,7 +64,7 @@ All SCSS files should be placed here and imported into `theme.scss` to be compil
 You may use liquid to reference assets from Shopify by wrapping your liquid in SASS interpolations (`#{}`) like so:
 
 ```
-a{
+a {
   colour: #{'{{ settings.link-colour }}'};
 }
 ```
