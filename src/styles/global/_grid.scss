@@ -96,44 +96,56 @@
 // Generate classes based on grid variable
 @for $i from 1 through $number-of-columns {
 
-  @media screen and (max-width: $xs-break) {
-    // base column sizes
     .col-#{$i} {
-      @include width($i);
+        @include width($i);
     }
-    // base offsets
+
     .offset-#{$i} {
-      @include offset-width($i);
+        @include offset-width($i);
     }
-  }
+}
 
-  // sm
-  @media screen and (min-width: $sm-break) {
-    .col-#{$i}-sm {
-      @include width($i);
-    }
-    .offset-#{$i}-sm {
-      @include offset-width($i);
-    }
-  }
+// sm
+@media screen and (min-width: $sm-break) {
 
-  // md
-  @media screen and (min-width: $md-break) {
-    .col-#{$i}-md {
-      @include width($i);
-    }
-    .offset-#{$i}-md {
-      @include offset-width($i);
-    }
-  }
+    @for $i from 1 through $number-of-columns {
 
-  // lg
-  @media screen and (min-width: $lg-break) {
-    .col-#{$i}-lg {
-      @include width($i);
+        .col-#{$i}-sm {
+            @include width($i);
+        }
+
+        .offset-#{$i}-sm {
+            @include offset-width($i);
+        }
     }
-    .offset-#{$i}-lg {
-      @include offset-width($i);
+}
+
+// md
+@media screen and (min-width: $md-break) {
+
+    @for $i from 1 through $number-of-columns {
+
+        .col-#{$i}-md {
+            @include width($i);
+        }
+
+        .offset-#{$i}-md {
+            @include offset-width($i);
+        }
     }
-  }
+}
+
+// lg
+@media screen and (min-width: $lg-break) {
+
+    @for $i from 1 through $number-of-columns {
+
+        .col-#{$i}-lg {
+            @include width($i);
+        }
+        // base offsets
+        .offset-#{$i}-lg {
+            @include offset-width($i);
+        }
+    }
 }

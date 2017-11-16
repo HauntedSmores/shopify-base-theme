@@ -88,13 +88,16 @@ Builds the `src` directory to `dist`. This includes deleting what is currently i
 - Uploads any changes to your store and automatically refreshes the browser.
 
 There are a couple of caveats to this one do-all command
-1. Themekit will be watching as soon as webpack starts building/watching. This means that themekit will start uploading/updating all the files that webpack manages (`theme.scss.liquid`, `theme.js`, and anything in the assets folder). <br><br>There's nothing explicitly wrong about this, but it might be annoying to wait for all of the uploads before starting to work.<br><br>If you prefer you can open two terminal windows and use `npm run webpack-watch` in the first, wait for that to idle, and in your second terminal window run `npm run theme-watch`. This way themekit will only start watching **_after_** webpack has run its first build.
+1. Themekit will be watching as soon as webpack starts building/watching. This means that themekit will start uploading/updating all the files that webpack manages (`theme.scss.liquid`, `theme.js`, and anything in the assets folder). <br><br>There's nothing explicitly wrong about this, but it might be annoying to wait for all of the uploads before starting to work.<br><br>If you prefer, you can open two terminal windows and use `npm run webpack-watch` in the first, wait for that to idle, and in your second terminal window run `npm run theme-watch`. This way themekit will only start watching **_after_** webpack has run its first build.
 
-2. Deleting a file from `src/assets` **will not** delete that file from the root `/assets` directory during the `watch` command.<br><br>This is a limitation of the `copy-webpack-plugin` used to copy and flatten files. It simply will not delete files during `webpack --watch`.<br><br>You can either stop your dev command, run `npm run build`, and rerun `npm run dev` or make your deletions in both `src/assets` and `/assets`.
+2. Deleting a file from `src/assets` **will not** delete that file from the root `/assets` directory during the `watch` command. This is a limitation of the `copy-webpack-plugin` used to copy and flatten files.<br><br>You can either stop your dev command, run `npm run build`, and rerun `npm run dev` or make your deletions in both `src/assets` and `/assets`.
 
 ### deploy
 
 Clears the `dist` folder, runs the build, and uploads your theme to your shopify production theme as defined in `config.yml`. This uses themekit's `replace` command, and as such will **COMPLETELY** replace the existing theme in your shopify store.
 
 ### webpack-watch
-Clears the `dist` folder and runs `webpack --watch` along side BrowserSync
+Clears the `dist` folder and runs `webpack --watch` along side BrowserSync.
+
+### theme-watch
+Runs themekit's watch command.

@@ -16,15 +16,9 @@
 @import 'global/grid';
 
 // Components
-@import 'components/gift-card';
-// @import 'components/nav-mega';
 @import 'components/ui-kit';
 
 // Pages
 @import 'pages/index';
 @import 'pages/blog';
 @import 'pages/cart';
-
-html {
-    background-color: green;
-}
