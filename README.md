@@ -50,7 +50,7 @@ Something like:
 </html>
 ```
 
-### `/locales`
+### `locales`
 Contains JSON files dedicated to controlling localization for different languages.
 
 ### `sections`
