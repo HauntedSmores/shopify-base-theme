@@ -65,13 +65,13 @@ Reusable pieces of liquid along with CMS capabilities. Similar to using `setting
 ### `/src/snippets`
 Reusable pieces of code without any CMS capabilities. Used for simple injections of reusable markup.
 
-### `src/assets`
+### `/src/assets`
 Directory for all theme images, fonts, etc. You may nest and create new folders and files as you wish - all directories will be flattened and the files will be placed in the `/assets` folder when using commands (see Commands section see below).
 
-### `src/scripts`
+### `/src/scripts`
 All javascript files go here and should be imported into `theme.js` to be bundled by webpack.
 
-### `src/styles`
+### `/src/styles`
 All SCSS files should be placed here and imported into `theme.scss` to be compiled and bundled by webpack. Use theme.scss to include any additional SCSS files created within this directory/sub-directories.
 
 You may use liquid to reference assets from Shopify by wrapping your liquid in SASS interpolations (`#{}`) like so:
@@ -84,7 +84,7 @@ a {
 
 The interpolation tags allow the SASS compiler to ignore these declarations and leave the inner string (without any quotes). All scss partials are compiled down into a single `theme.scss.liquid` file so that the remaining liquid will be rendered by Shopify server side.
 
-### `src/templates`
+### `/src/templates`
 All the necessary shopify templates live here. The `/customers` sub-directory includes all account related templates.
 
 ***
