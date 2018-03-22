@@ -16,7 +16,17 @@ Edit the `config.yml` to use your correct password and theme id's. Your producti
 
 Detailed instructions on setting up `config.yml` can be found [here.](https://shopify.github.io/themekit/configuration)
 
-Finally, update the `proxy` value in the `bs-config.js` file to correctly proxy your live Shopify domain to your local BrowserSync server during development.
+Finally, update the `proxy` value in the `bs-config.js` file to correctly proxy your live Shopify domain to your local BrowserSync server during development. 
+
+Example:
+
+```
+module.exports = {
+  "files": "theme.update",
+  "proxy": "https://mynewstore.myshopify.com/",
+  "reloadDelay": 1500
+};
+```
 
 ## Structure
 
