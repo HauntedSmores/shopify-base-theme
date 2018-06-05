@@ -1,5 +1,4 @@
 module.exports = {
-    "files": "theme.update",
-    "proxy": "https://carharttwip.myshopify.com/",
-    "reloadDelay": 1000
+  "files": "theme.update",
+  "proxy": "https://verbalplusvisual.myshopify.com/",
 };

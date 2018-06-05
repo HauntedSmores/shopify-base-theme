@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="{{ settings.color_primary }}">
+
+{% capture seo_title %}
+    {{ page_title }}
+    {% if current_tags %}
+        {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {% endif %}
+    {% if current_page != 1 %}
+        &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {% endif %}
+    {% unless page_title contains shop.name %}
+        &ndash; {{ shop.name }}
+    {% endunless %}
+{% endcapture %}
+
+<title>{{ seo_title }}</title>
+
+{% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+{% endif %}
+
+{% include 'scripts' %}
+
+<!-- Stylesheets -->
+{{ 'theme.css' | asset_url | stylesheet_tag }}

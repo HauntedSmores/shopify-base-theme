@@ -1,0 +1,56 @@
+<div class="global-footer">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-2-sm offset-1-sm col-6">
+                <div data-dy-unit="Footer_Company" class="footer__list">
+                    <h3 class="footer__title">Company</h3>
+                    {% for link in linklists.footer.links %}
+                        <div>
+                            <a class="footer__link paragraph" href="{{ link.url }}">{{ link.title }}</a>
+                        </div>
+                    {% endfor %}
+                    <p class="utility margin-top--x-small">© {{ "now" | date: "%Y" }} Carhartt WIP</p>
+                </div>
+            </div>
+            <div data-dy-unit="Footer_Customer_Service" class="col-2-sm offset-1-sm col-6">
+                <div class="footer__list">
+                    <h3 class="footer__title">Customer Service</h3>
+                    {% for link in linklists.customer-service.links %}
+                        <div>
+                            <a class="footer__link paragraph" href="{{ link.url }}">{{ link.title }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-4-sm offset-1-sm col-12">
+                <div class="row flush">
+                    {% include 'newsletter' %}
+                </div>
+                <div data-dy-unit="Footer_Social" class="footer__social-icons row flush">
+                    <a href="https://www.instagram.com/carharttwip" target="_blank">
+                        <svg class="footer__social-icon">
+                            <use xlink:href="#black--instagram"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/carharttwip" target="_blank">
+                        <svg class="footer__social-icon">
+                            <use xlink:href="#black--facebook"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/carharttwip_usa" target="_blank">
+                        <svg class="footer__social-icon">
+                            <use xlink:href="#black--twitter"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC53ve6RC-rt43Q2e8fpj0PA" target="_blank">
+                        <svg class="footer__social-icon">
+                            <use xlink:href="#black--youtube"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html class="no-js supports-no-cookies" lang="{{ shop.locale }}">
+    <head>
+        {% include 'head' %}
+        {{ content_for_header }}
+    </head>
+
+    <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+        {% include 'icons' %}
+        {{ content_for_layout }}
+    </body>
+</html>

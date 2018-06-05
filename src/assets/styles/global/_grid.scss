@@ -1,0 +1,151 @@
+.container-lg {
+  margin: 0 auto;
+  max-width: $lg-break;
+}
+
+.container-md {
+  margin: 0 auto;
+  max-width: $md-break;
+}
+
+.container-sm {
+  margin: 0 auto;
+  max-width: $sm-break;
+}
+
+@mixin width($width) {
+  width: ($width / $number-of-columns) * 100%;
+}
+@mixin offset-width($width) {
+  margin-left: ($width / $number-of-columns) * 100%;
+}
+
+.row {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding-left: $gutter;
+  padding-right: $gutter;
+
+  &.align-top {
+    align-items: flex-start;
+  }
+
+  &.align-bottom {
+    align-items: flex-end;
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+
+  &.flush {
+    padding: 0;
+
+    & > [class^="col-"] {
+      padding: 0;
+    }
+  }
+
+  &.no-pad {
+      padding: 0;
+  }
+
+  &.justify-around {
+    justify-content: space-around;
+  }
+
+  &.justify-between {
+    justify-content: space-between;
+  }
+
+  &.justify-center {
+    justify-content: center;
+  }
+
+  &.justify-end {
+    justify-content: flex-end;
+  }
+
+  &.no-wrap {
+    flex-wrap: nowrap;
+  }
+}
+// Base class
+[class*="col-"] {
+  padding: $gutter;
+  box-sizing: border-box;
+  width: 100%;
+
+  &.align-top {
+    align-self: flex-start;
+  }
+
+  &.align-bottom {
+    align-self: flex-end;
+  }
+
+  &.align-center {
+    align-self: center;
+  }
+
+  > .row {
+    padding: 0;
+  }
+
+  @for $i from 1 through $number-of-columns {
+    &.order-#{$i} {
+      order: $i;
+    }
+  }
+}
+
+.col-auto {
+  width: auto;
+}
+// Generate classes based on grid variable
+@for $i from 1 through $number-of-columns {
+  .col-#{$i} {
+    @include width($i);
+  }
+
+  .offset-#{$i} {
+    @include offset-width($i);
+  }
+}
+// sm
+@media screen and (min-width: $sm-break) {
+  @for $i from 1 through $number-of-columns {
+    .col-#{$i}-sm {
+      @include width($i);
+    }
+
+    .offset-#{$i}-sm {
+      @include offset-width($i);
+    }
+  }
+}
+// md
+@media screen and (min-width: $md-break) {
+  @for $i from 1 through $number-of-columns {
+    .col-#{$i}-md {
+      @include width($i);
+    }
+
+    .offset-#{$i}-md {
+      @include offset-width($i);
+    }
+  }
+}
+// lg
+@media screen and (min-width: $lg-break) {
+  @for $i from 1 through $number-of-columns {
+    .col-#{$i}-lg {
+      @include width($i);
+    }
+    // base offsets
+    .offset-#{$i}-lg {
+      @include offset-width($i);
+    }
+  }
+}

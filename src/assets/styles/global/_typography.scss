@@ -1,0 +1,129 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i');
+
+@font-face {
+	font-family: 'Hoboken Sans';
+	src: url('{{ "hoboken-sans.ttf" | asset_url }}');
+}
+
+$hoboken-sans: 'Hoboken Sans', sans-serif;
+$roboto: 'Roboto', sans-serif;
+$roboto-mono: 'Roboto Mono', sans-serif;
+
+html {
+	font-size: $base-font-size;
+	color: rgba($wip-black, 0.9);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1 {
+	font-family: $hoboken-sans;
+	font-size: calc(3rem + 1vw);
+	line-height: calc(3rem + 1vw);
+	text-transform: uppercase;
+
+	@media (min-width: $md-break) {
+		font-size: calc(3rem + 2vw);
+		line-height: calc(3rem + 2vw);
+	}
+}
+
+h2, .h2 {
+	font-family: $hoboken-sans;
+	font-size: calc(1.875rem + 1vw);
+	line-height: calc(2.25rem + 1vw);
+	text-transform: uppercase;
+}
+
+h3, .h3 {
+	font-family: $roboto;
+	font-size: calc(1.125rem + 0.125vw);
+	line-height: calc(1.5rem + 0.5vw);
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+
+h4, .subheader {
+	font-family: $roboto-mono;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	letter-spacing: 0.5px;
+	font-weight: 500;
+}
+
+p, .paragraph, 
+figcaption, 
+article span {
+	font-family: $roboto;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	letter-spacing: 1.5px;
+
+	&.paragraph--large {
+		font-family: $hoboken-sans;
+		font-size: 1.875rem;
+		line-height: 3rem;
+	}
+}
+
+article strong {
+	font-family: $roboto;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	letter-spacing: 1.5px;
+	font-weight: bold;
+}	
+
+a, .text-link {
+	font-family: $roboto-mono;
+	font-size: 0.875rem;
+	line-height: 1.875rem;
+	letter-spacing: 0.5px;
+	font-style: italic;
+	color: inherit;
+	transition: color 0.5s;
+	text-decoration: underline;
+	cursor: pointer;
+
+	&.inline-block {
+		display: inline-block;
+	}
+
+	&:hover {
+		color: $wip-orange;
+	}
+}
+
+ul {
+	margin-bottom: 24px;
+}
+
+li {
+	@extend p;
+}
+
+.product-heading {
+	@extend .paragraph;
+	font-weight: 500;
+}
+
+.product-paragraph {
+	@extend .product-heading;
+	font-weight: 400;
+}
+
+.discount-price {
+	position: relative;
+	display: inline-block;
+	&:after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background-color: currentColor;
+	}
+}
