@@ -7,6 +7,9 @@ const svg_sprite = require('gulp-svg-sprite');
 const browser_sync = require('browser-sync').create();
 const bs_config = require('./bs-config.js');
 const Bundler = require('parcel-bundler');
+const gulp_sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
 const themekit = require('@shopify/themekit');
 const del = require('del');
 const chalk = require('chalk');
@@ -111,6 +114,22 @@ gulp.task('migrate', function() {
         .pipe(gulp.dest('dist'));
 });
 
+// Compile sass
+function sass() {
+    return gulp.src('src/assets/styles/*.scss')
+        .pipe(gulp_sass({ outputStyle: 'compressed', sourceMapEmbed: process.env.NODE_ENV == 'production' ? true : false }).on('error', gulp_sass.logError))
+        .pipe(postcss([autoprefixer()], {map: process.env.NODE_ENV == 'development'}))
+        .pipe(rename({extname: '.css.liquid'}))
+        .pipe(gulp.dest('dist/assets'));
+}
+
+gulp.task('sass', sass);
+
+// Watch sass
+gulp.task('sass:watch', function () {
+  gulp.watch('src/assets/styles/**/*.scss', sass);
+});
+
 gulp.task('migrate:watch', gulp.series('migrate', function(done) {
     let watcher = gulp.watch(['src/**/*', '!src/assets', '!src/assets/**/*']);
 
@@ -196,10 +215,44 @@ gulp.task('theme:update', function(done) {
     });
 });
 
-gulp.task('build', gulp.series('set-prod', 'clear', 'sprite-sheet', 'assets', 'migrate', 'parcel'));
+// Tasks for npm scripts
+let build_commands = [
+    'set-prod',
+    'clear',
+    'sprite-sheet',
+    'assets',
+    'sass',
+    'migrate',
+    'parcel'
+];
 
-gulp.task('deploy', gulp.series('set-prod', 'build', 'theme:deploy'));
+let deploy_commands = [
+    'set-prod',
+    'build',
+    'theme:deploy'
+];
 
-gulp.task('update', gulp.series('set-prod', 'build', 'theme:update'));
+let update_commands = [
+    'set-prod',
+    'build',
+    'theme:update'
+];
 
-gulp.task('watch', gulp.series('set-dev', 'clear', 'assets:watch', 'migrate:watch', 'parcel', 'theme:watch', 'browser-sync'));
+let watch_commands = [
+    'set-dev',
+    'clear',
+    'assets:watch',
+    'sass:watch',
+    'migrate:watch',
+    'parcel',
+    'theme:watch',
+    'browser-sync'
+];
+
+gulp.task('build', gulp.series(build_commands));
+
+gulp.task('deploy', gulp.series(deploy_commands));
+
+gulp.task('update', gulp.series(update_commands));
+
+gulp.task('watch', gulp.series(watch_commands));
