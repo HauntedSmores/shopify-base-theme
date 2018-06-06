@@ -126,8 +126,9 @@ function sass() {
 gulp.task('sass', sass);
 
 // Watch sass
-gulp.task('sass:watch', function () {
+gulp.task('sass:watch', function (done) {
   gulp.watch('src/assets/styles/**/*.scss', sass);
+  done();
 });
 
 gulp.task('migrate:watch', gulp.series('migrate', function(done) {
@@ -171,7 +172,6 @@ gulp.task('parcel', function(done) {
 
     // Initialises a bundler using the entrypoint location and options provided
     const bundler = new Bundler(entry_file, parcel_options);
-
     bundler.bundle().then(() => done());
 });
 
