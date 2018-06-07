@@ -242,7 +242,6 @@ let watch_commands = [
     'set-dev',
     'clear',
     'assets:watch',
-    'sass',
     'sass:watch',
     'migrate:watch',
     'parcel',
