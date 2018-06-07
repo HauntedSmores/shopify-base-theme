@@ -2,24 +2,18 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i');
 
-@font-face {
-	font-family: 'Hoboken Sans';
-	src: url('{{ "hoboken-sans.ttf" | asset_url }}');
-}
-
-$hoboken-sans: 'Hoboken Sans', sans-serif;
 $roboto: 'Roboto', sans-serif;
 $roboto-mono: 'Roboto Mono', sans-serif;
 
 html {
 	font-size: $base-font-size;
-	color: rgba($wip-black, 0.9);
+	color: rgba($black, 0.9);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 h1, .h1 {
-	font-family: $hoboken-sans;
+	font-family: $roboto;
 	font-size: calc(3rem + 1vw);
 	line-height: calc(3rem + 1vw);
 	text-transform: uppercase;
@@ -28,10 +22,17 @@ h1, .h1 {
 		font-size: calc(3rem + 2vw);
 		line-height: calc(3rem + 2vw);
 	}
+
+	&.primary {
+		color: $primary-color;
+		font-family: $roboto-mono;
+		margin-top: 4rem;
+		text-align: center;
+	}
 }
 
 h2, .h2 {
-	font-family: $hoboken-sans;
+	font-family: $roboto;
 	font-size: calc(1.875rem + 1vw);
 	line-height: calc(2.25rem + 1vw);
 	text-transform: uppercase;
@@ -62,7 +63,7 @@ article span {
 	letter-spacing: 1.5px;
 
 	&.paragraph--large {
-		font-family: $hoboken-sans;
+		font-family: $roboto;
 		font-size: 1.875rem;
 		line-height: 3rem;
 	}
@@ -92,7 +93,7 @@ a, .text-link {
 	}
 
 	&:hover {
-		color: $wip-orange;
+		color: $primary-color;
 	}
 }
 
@@ -102,28 +103,4 @@ ul {
 
 li {
 	@extend p;
-}
-
-.product-heading {
-	@extend .paragraph;
-	font-weight: 500;
-}
-
-.product-paragraph {
-	@extend .product-heading;
-	font-weight: 400;
-}
-
-.discount-price {
-	position: relative;
-	display: inline-block;
-	&:after {
-		content: "";
-		position: absolute;
-		top: 50%;
-		left: 0;
-		width: 100%;
-		height: 2px;
-		background-color: currentColor;
-	}
 }

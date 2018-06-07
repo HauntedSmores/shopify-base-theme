@@ -1,18 +1,18 @@
 // @charset "UTF-8";
 //
 // // Variables
-// @import 'global/variables';
+@import 'global/variables';
 //
 // // Mixins
 // @import 'global/mixins';
 //
 // // Global
-// @import 'global/normalize';
-// @import 'global/reset';
+@import 'global/normalize';
+@import 'global/reset';
 // @import 'global/utility';
-// @import 'global/typography';
-// @import 'global/layout';
-// @import 'global/grid';
+@import 'global/typography';
+@import 'global/layout';
+@import 'global/grid';
 //
 // // Components
 // @import 'components/nav';

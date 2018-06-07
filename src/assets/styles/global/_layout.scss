@@ -1,14 +1,9 @@
 // Layout styles
 body {
-    padding-top: 60px;
 
-    &.fixed {
-        overflow: hidden;
-    }
-
-	&.template-password {
-		padding: 0;
-	}
+  &.fixed {
+     overflow: hidden;
+  }
 }
 
 // Overlay
@@ -16,7 +11,7 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
-    height: 100%;
+  height: 100%;
 	background-color: rgba(0,0,0,0.5);
 	opacity: 0;
 	visibility: hidden;
@@ -31,11 +26,4 @@ body {
 	@media (max-width: $md-break) {
 		display: none;
 	}
-}
-
-// Return Magic
-.app-returnmagic {
-    @media (min-width: $md-break) {
-        min-height: calc(100vh - 304px);
-    }
 }
