@@ -12,13 +12,9 @@ or if you dont have SSH setup with github:
 
 Next, run `npm install` to install required dependencies.
 
-Edit the `config.yml` to use your correct password and theme id's. Your production definition block **must** be called "production" for the `deploy` command to work properly.
-
-Detailed instructions on setting up `config.yml` can be found [here.](https://shopify.github.io/themekit/configuration)
+Edit the `config.yml` to use your correct password and theme id's. Your production definition block **must** be called "production" for the `deploy` command to work properly. For the theme commands to work properly, make sure you have a yamel entry named "development" and one named "production". Detailed instructions on setting up `config.yml` can be found [here.](https://shopify.github.io/themekit/configuration)
 
 Finally, update the `proxy` value in the `bs-config.js` file to correctly proxy your live Shopify domain to your local BrowserSync server during development.
-
-Example:
 
 ```
 module.exports = {
@@ -29,22 +25,22 @@ module.exports = {
 
 ## Structure
 
-### /dist/
-Destination of compiled files from /src directory. Do not edit files in the directory directly.
+### dist/
+Destination of compiled files from /src directory. Do not edit files in this directory directly.
 
-### /src/
-This directory contains the files that should be directely editing during store development.
+### src/
+This directory contains the files that should be directly editing during store development.
 
-### /src/config
+### src/config
 Contains `settings_schema.json` used to add options to the theme to be edited in your store's dashboard. Once data is added in the theme settings, a `settings_data.json` file will be generated in your hosted theme containing the data. We chose to ignore this file in our theme's `config.yml` because its dangerously easy to erase all of the hosted CMS data in your theme. If you ever need it, you can get to it in your store's dashboard.
 
-### /src/layout
-These liquid templates contain the outer markup that the rest of our templates will me injected into.
+### src/layout
+These liquid files contain the outer markup that the rest of our templates will be injected into.
 
 Something like:
 
 ```
-// outer layout template
+// Outer layout template
 <html>
     <body>
         // Content from other templates
@@ -52,23 +48,23 @@ Something like:
 </html>
 ```
 
-### /src/locales
+### src/locales
 Contains JSON files dedicated to controlling localization for different languages.
 
-### /src/sections
+### src/sections
 Reusable pieces of liquid along with CMS capabilities. Similar to using `settings_schema.json`, except the options are only available on pages that contain a given section.
 
-### /src/snippets
+### src/snippets
 Reusable pieces of code without any CMS capabilities. Used for simple injections of reusable markup.
 
-### /src/assets
-Directory for all theme assets EXCEPT for JavaScript and CSS. You may nest and create new folders and files as you wish - all directories will be flattened and the files will be placed in the `/assets` folder when using commands (see Commands section see below).
+### src/assets
+Directory for all theme assets. Depending on the type of file, they will be processed and moved to the `dist` directory.
 
-### /src/scripts
-All javascript files go here and should be imported into `theme.js` to be bundled by webpack.
+### src/assets/scripts
+All javascript files go here and should be imported into `theme.js` to be bundled. You can create and nest folders as needed.
 
-### /src/styles
-All SCSS files should be placed here and imported into `theme.scss` to be compiled and bundled by webpack. Use theme.scss to include any additional SCSS files created within this directory/sub-directories.
+### src/assets/styles
+All SCSS files should be placed here and imported into `theme.scss` to be compiled and bundled. You can create and nest folders as needed.
 
 You may use liquid to reference assets from Shopify by wrapping your liquid in SASS interpolations (`#{}`) like so:
 
@@ -81,34 +77,36 @@ a {
 The interpolation tags allow the SASS compiler to ignore these declarations and leave the inner string (without any quotes). All scss partials are compiled down into a single `theme.scss.liquid` file so that the remaining liquid will be rendered by Shopify server side.
 
 ### /src/templates
-All the necessary shopify templates live here. The `/customers` sub-directory includes all account related templates.
+All the necessary Shopify templates live here. The `/customers` sub-directory includes all account related templates.
 
 ***
 
-## Comands
+## Commands
 Listed here are the commands available with this theme. Command syntax: `npm run <command>`.
 
 ### build
-Builds the `src` directory to `dist`. This includes deleting what is currently in `dist`
-
-### dev
 - Clears the `dist` folder
+- Bundles assets
+- Migrates template files to directory to `dist`
+
+All assets are bundled for production with minification, no source maps, and less console logging.
+
+### watch
+- Runs the build command for development
+    - No minification
+    - Source maps are included
+    - Expanded bundle information logged in the terminal
+- Starts watching your project for changes
 - Opens a browser window running a local BrowserSync server proxied to your store
-- Watches your project for changes
-- Compiles JS, SCSS and migrates/flattens your images folder
-- Uploads any changes to your store and automatically refreshes the browser.
-
-There are a couple of caveats to this one do-all command
-1. Themekit will be watching as soon as webpack starts building/watching. This means that themekit will start uploading/updating all the files that webpack manages (`theme.scss.liquid`, `theme.js`, and anything in the assets folder). <br><br>There's nothing explicitly wrong about this, but it might be annoying to wait for all of the uploads before starting to work.<br><br>If you prefer, you can open two terminal windows and use `npm run webpack-watch` in the first, wait for that to idle, and in your second terminal window run `npm run theme-watch`. This way themekit will only start watching **_after_** webpack has run its first build.
-
-2. Deleting a file from `src/assets` **will not** delete that file from the root `/assets` directory during the `watch` command. This is a limitation of the `copy-webpack-plugin` used to copy and flatten files.<br><br>You can either stop your dev command, run `npm run build`, and rerun `npm run dev` or make your deletions in both `src/assets` and `/assets`.
+- Uploads any changes to your store on the "development" theme and automatically refreshes the browser
 
 ### deploy
+- Runs the build command
+- Removes **EVERYTHING** from the theme labelled "production"
+- Uploads your theme files to the theme named "production" in your `config.yml`
 
-Clears the `dist` folder, runs the build, and uploads your theme to your shopify production theme as defined in `config.yml`. This uses themekit's `replace` command, and as such will **COMPLETELY** replace the existing theme in your shopify store.
+You can also deploy to another theme. Just name whichever theme you would like to deploy to, "production". To avoid conflict, make sure all theme's are unique. You can only have 1 theme named "production" at a time.
 
-### webpack-watch
-Clears the `dist` folder and runs `webpack --watch` along side BrowserSync.
-
-### theme-watch
-Runs themekit's watch command.
+### update
+- Runs the build command
+- Updates all changed files on the "development" theme
