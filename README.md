@@ -109,7 +109,7 @@ All the necessary Shopify templates live here. The `/customers` sub-directory in
 ***
 
 ## Commands
-Listed here are the commands available with this theme. Command syntax: `npm run <command>`.
+Listed here are the commands available with this theme. Command syntax: `npm run <command>`
 
 ### build
 - Clears the `dist` folder
