@@ -58,7 +58,34 @@ Reusable pieces of liquid along with CMS capabilities. Similar to using `setting
 Reusable pieces of code without any CMS capabilities. Used for simple injections of reusable markup.
 
 ### src/assets
-Directory for all theme assets. Depending on the type of file, they will be processed and moved to the `dist` directory.
+Directory for all theme assets. Depending on the type of file, they will be processed and moved to the `dist/assets` directory.
+
+### src/assets/fonts
+Nothing special here, just a commonly used asset folder that's included. Fonts will be flattened/migrated to the `dist/assets` folder the same way images are.
+
+### src/assets/icons
+You can put SVG files here and they will be optimized with SVGO and compiled into a single sprite sheet in 'src/snippets/icons.liquid'. The sprite sheet plugin takes the file name and makes that the symbols' id. If you nest icons in folders, the folder names will be appended to the file name with `--`.
+
+For the SVGs to work properly, make sure they have a `viewPort` property on the `<svg>` element.
+
+#### Usage:
+
+For `src/assets/icons/my-svg.svg`
+```
+<svg>
+    <use xlink:href="#my-svg"/>
+</svg>
+```
+
+For `src/assets/icons/dark/my-svg.svg`
+```
+<svg>
+    <use xlink:href="#dark--my-svg"/>
+</svg>
+```
+
+### src/assets/images
+Pretty simple - images go here, you may nest folders, and they will be flattened and migrated to the `dist/assets` folder.
 
 ### src/assets/scripts
 All javascript files go here and should be imported into `theme.js` to be bundled. You can create and nest folders as needed.
@@ -70,7 +97,7 @@ You may use liquid to reference assets from Shopify by wrapping your liquid in S
 
 ```
 a {
-  colour: #{'{{ settings.link-color }}'};
+  colour: #{'{{ settings.link_color }}'};
 }
 ```
 
@@ -110,3 +137,5 @@ You can also deploy to another theme. Just name whichever theme you would like t
 ### update
 - Runs the build command
 - Updates all changed files on the "development" theme
+
+You can also update another theme. Same as above, just name whichever theme you would like to update, "production". To avoid conflict, make sure all theme's are unique. You can only have 1 theme named "production" at a time.
