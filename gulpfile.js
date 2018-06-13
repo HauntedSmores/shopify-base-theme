@@ -17,27 +17,27 @@ const chalk = require('chalk');
 // Set NODE_ENV
 process.env.NODE_ENV = 'development';
 
-gulp.task('set-dev', function(done) {
+function set_dev(done) {
     process.env.NODE_ENV = 'development';
     done();
-});
+}
 
-gulp.task('set-prod', function(done) {
+function set_prod(done) {
     process.env.NODE_ENV = 'production';
     done();
-});
+}
 
 // Clear Dist
-gulp.task('clear', function(done) {
+function clear(done) {
     del.sync('dist/**/*');
     done();
-});
+}
 
 // BrowserSync
-gulp.task('browser-sync', function(done) {
+function sync(done) {
     browser_sync.init(bs_config);
     done();
-});
+}
 
 // Sprite sheet
 const sprite_config = {
@@ -60,78 +60,64 @@ const sprite_config = {
     }
 };
 
-gulp.task('sprite-sheet', function() {
-	return gulp.src('src/assets/images/icons/**/*.svg', {since: gulp.lastRun('sprite-sheet')})
-	.pipe(svg_sprite(sprite_config))
-	.pipe(gulp.dest('src/snippets'));
-});
+function sprites() {
+	return gulp.src('src/assets/icons/**/*.svg')
+    	.pipe(svg_sprite(sprite_config))
+    	.pipe(gulp.dest('src/snippets'));
+};
 
-// Migrate assets
-gulp.task('assets', gulp.series('sprite-sheet', function() {
+function watch_sprites(done) {
+    gulp.watch('src/assets/icons/**/*.svg', sprites);
+    done();
+}
+
+// Assets
+function assets() {
     return gulp.src(['src/assets/**/*', '!src/assets/{scripts,styles,icons}/**/*'])
 		.pipe(changed('dist'))
         .pipe(flatten())
         .pipe(gulp.dest('dist/assets'));
-}));
+}
 
-gulp.task('assets:watch', gulp.series('assets', function(done) {
+function watch_assets(done) {
     let globs = [
         'src/assets/**/*',
-        '!src/assets/{scripts,styles,images/icons}',
-        '!src/assets/{scripts,styles,images/icons}/**/*'
+        '!src/assets/{scripts,styles,icons}',
+        '!src/assets/{scripts,styles,icons}/**/*'
     ];
+
     let watcher = gulp.watch(globs);
 
     // Update
 	watcher.on('change', function(file, stats) {
         console.log(chalk.magenta('[UPDATED] ') + chalk.blue(path.basename(file)));
-        return gulp.src(['src/assets/**/*', '!src/assets/{scripts,styles}/**/*', '!src/assets/images/icons/**/*'])
-            .pipe(changed('dist/assets'))
-            .pipe(flatten())
-            .pipe(gulp.dest('dist/assets'));
+        assets();
 	});
 
     // Add
 	watcher.on('add', function(file, stats) {
         console.log(chalk.green('[ADDED] ') + chalk.blue(path.basename(file)));
-        return gulp.src(['src/assets/**/*', '!src/assets/{scripts,styles}/**/*', '!src/assets/images/icons/**/*'])
-            .pipe(changed('dist/assets'))
-            .pipe(flatten())
-            .pipe(gulp.dest('dist/assets'));
+        assets();
 	});
 
+    // Delete
 	watcher.on('unlink', function(file, stats) {
         console.log(chalk.red('[DELETED] ') + chalk.blue(path.basename(file)));
-        return del.sync('dist/assets/' + path.basename(filea));
+        return del.sync('dist/assets/' + path.basename(file));
 	});
     done();
-}));
+}
 
-// Migrate template files
-gulp.task('migrate', function() {
+let watch_all_assets = gulp.series(assets, sprites, watch_assets, watch_sprites);
+
+// Template files
+function liquid() {
     return gulp.src(['src/**/*', '!src/assets', '!src/assets/**/*'])
         .pipe(changed('dist'))
         .pipe(gulp.dest('dist'));
-});
-
-// Compile sass
-function sass() {
-    return gulp.src('src/assets/styles/*.scss')
-        .pipe(gulp_sass({ outputStyle: 'compressed', sourceMapEmbed: process.env.NODE_ENV == 'production' ? true : false }).on('error', gulp_sass.logError))
-        .pipe(postcss([autoprefixer()], {map: process.env.NODE_ENV == 'development'}))
-        .pipe(rename({extname: '.css.liquid'}))
-        .pipe(gulp.dest('dist/assets'));
 }
 
-gulp.task('sass', sass);
-
-// Watch sass
-gulp.task('sass:watch', gulp.series('sass', function (done) {
-  gulp.watch('src/assets/styles/**/*.scss', sass);
-  done();
-}));
-
-gulp.task('migrate:watch', gulp.series('migrate', function(done) {
+let watch_liquid = gulp.series(liquid, function(done) {
     let watcher = gulp.watch(['src/**/*', '!src/assets', '!src/assets/**/*']);
 
     // Update
@@ -155,12 +141,27 @@ gulp.task('migrate:watch', gulp.series('migrate', function(done) {
         return del.sync('dist/**/' + path.basename(file));
 	});
     done();
-}));
+});
+
+// Compile sass
+function sass() {
+    return gulp.src('src/assets/styles/*.scss')
+        .pipe(gulp_sass({ outputStyle: 'compressed', sourceMapEmbed: process.env.NODE_ENV == 'production' ? true : false }).on('error', gulp_sass.logError))
+        .pipe(postcss([autoprefixer()], {map: process.env.NODE_ENV == 'development'}))
+        .pipe(rename({extname: '.css.liquid'}))
+        .pipe(gulp.dest('dist/assets'));
+}
+
+// Watch sass
+watch_sass = gulp.series(sass, function(done) {
+    gulp.watch('src/assets/styles/**/*.scss', sass);
+    done();
+});
 
 // Parcel
 const entry_file = path.join(__dirname, './src/assets/scripts/theme.js');
 
-gulp.task('parcel', function(done) {
+function parcel(done) {
     // Bundler options
     let parcel_options = {
       outDir: './dist/assets', // The out directory to put the build files in, defaults to dist
@@ -173,11 +174,10 @@ gulp.task('parcel', function(done) {
     // Initialises a bundler using the entrypoint location and options provided
     const bundler = new Bundler(entry_file, parcel_options);
     bundler.bundle().then(() => done());
-});
+};
 
 // Themekit
-gulp.task('theme:watch', function(done) {
-
+function theme_watch(done) {
     themekit.command({
         args: ['watch', '--dir', 'dist', '--notify=theme.update']
     }, function(err) {
@@ -187,9 +187,9 @@ gulp.task('theme:watch', function(done) {
         }
     });
     done();
-});
+};
 
-gulp.task('theme:deploy', function(done) {
+function theme_deploy(done) {
     themekit.command({
         args: ['replace', '--env', process.env.NODE_ENV, '--dir', 'dist']
     }, function(err) {
@@ -198,11 +198,11 @@ gulp.task('theme:deploy', function(done) {
             return;
         }
         console.log(chalk.green('Theme has been deployed'));
-        done();
     });
-});
+    done();
+};
 
-gulp.task('theme:update', function(done) {
+function theme_update(done) {
     themekit.command({
         args: ['upload', '--env', process.env.NODE_ENV, '--dir', 'dist']
     }, function(err) {
@@ -211,42 +211,40 @@ gulp.task('theme:update', function(done) {
             return;
         }
         console.log('Theme has been updated');
-        done();
     });
-});
+    done();
+};
 
 // Tasks for npm scripts
 let build_commands = [
-    'set-prod',
-    'clear',
-    'sprite-sheet',
-    'assets',
-    'sass',
-    'migrate',
-    'parcel'
+    set_prod,
+    clear,
+    sprites,
+    assets,
+    sass,
+    liquid,
+    parcel
 ];
 
 let deploy_commands = [
-    'set-prod',
     'build',
-    'theme:deploy'
+    theme_deploy
 ];
 
 let update_commands = [
-    'set-prod',
     'build',
-    'theme:update'
+    theme_update
 ];
 
 let watch_commands = [
-    'set-dev',
-    'clear',
-    'assets:watch',
-    'sass:watch',
-    'migrate:watch',
-    'parcel',
-    'theme:watch',
-    'browser-sync'
+    set_dev,
+    clear,
+    watch_all_assets,
+    watch_sass
+    watch_liquid,
+    parcel,
+    theme_watch,
+    sync
 ];
 
 gulp.task('build', gulp.series(build_commands));
