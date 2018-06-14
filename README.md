@@ -1,4 +1,4 @@
-# V+V Base Shopify theme
+# Shopify theme
 
 ## Setup
 
