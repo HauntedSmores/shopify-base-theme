@@ -114,7 +114,7 @@ Listed here are the commands available with this theme. Command syntax: `npm run
 ### build
 - Clears the `dist` folder
 - Bundles assets
-- Migrates template files to directory to `dist`
+- Migrates template files from `src` directory to `dist`
 
 All assets are bundled for production with minification, no source maps, and less console logging.
 
