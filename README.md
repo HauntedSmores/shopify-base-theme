@@ -4,11 +4,11 @@
 
 To get started using the theme, clone this repository:
 
-`git clone git@github.com:verbalplusvisual/vpv-shopify-base-theme.git`
+`git clone git@github.com:HauntedSmores/shopify-base-theme.git`
 
 or if you dont have SSH setup with github:
 
-`git clone https://github.com/verbalplusvisual/vpv-shopify-base-theme.git`
+`git clone https://github.com/HauntedSmores/shopify-base-theme.git`
 
 Next, run `npm install` to install required dependencies.
 
