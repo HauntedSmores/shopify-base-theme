@@ -240,7 +240,7 @@ let watch_commands = [
     set_dev,
     clear,
     watch_all_assets,
-    watch_sass
+    watch_sass,
     watch_liquid,
     parcel,
     theme_watch,
